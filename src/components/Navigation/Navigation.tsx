@@ -12,7 +12,7 @@ const Navigation: FC = () => {
             alt="Flowbite Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Structure Daily Planner
+            React Typescript Structure Daily Planner
           </span>
         </a>
         <button
