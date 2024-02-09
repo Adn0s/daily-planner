@@ -12,7 +12,8 @@ export type TaskType = {
   color: Color;
   icon: Icons;
   isDone: boolean;
-  priority: 'low' | 'medium' | 'high';
+  piority: string;
+  connectedWith: boolean | number;
 };
 
 export type TaskProps = {

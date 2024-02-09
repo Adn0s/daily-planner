@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from 'react';
+import { data } from '../../assets/data';
 import Task from '../Task/Task';
 import { TaskType } from '../Task/Task.d';
 import { formatDate, getDateComponentsFromEpoch } from '../../utils/Date';
-import { colorVariants } from './stylesVariations';
+import { colorVariants, taskHoursVariations, isDoneVariations } from './styles';
 import { Color } from '../../types/Colors.d';
+import { Hours } from '../../types/Hours.d';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSelector } from 'react-redux';
 
 const generateAllHoursInDay = (from = 0, to = 24) => {
   const hours = [];
@@ -38,29 +39,8 @@ const getProcessedDates = (
 };
 
 const Structure: FC = () => {
-  const data = useSelector((state) => state.data.data);
-  const loading = useSelector((state) => state.data.loading);
   const [records, setRecords] = useState<TaskType[]>(data);
   const [progress, setProgress] = useState<string>('0%');
-
-  useEffect(() => {
-    const totalTasks = records.length;
-    const doneTasks = records.filter((task: TaskType) => task.isDone).length;
-    const percentageDone = (doneTasks / totalTasks) * 100 + '%';
-    setProgress(percentageDone);
-  }, [records]);
-
-  if (records && records.length === 0) {
-    return <></>;
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!records || records.length === 0) {
-    return <div>No records available.</div>;
-  }
 
   const handleChangedDone = (task: TaskType) => {
     const updatedRecords = records.map((record) => {
@@ -72,6 +52,13 @@ const Structure: FC = () => {
 
     setRecords(updatedRecords);
   };
+
+  useEffect(() => {
+    const totalTasks = records.length;
+    const doneTasks = records.filter((task: TaskType) => task.isDone).length;
+    const percentageDone = (doneTasks / totalTasks) * 100 + '%';
+    setProgress(percentageDone);
+  }, [records]);
 
   return (
     <div className="text-center">
@@ -108,46 +95,48 @@ const Structure: FC = () => {
             return (
               <div key={task.id} className="flex flex-col">
                 {hoursBefore.map((hour) => (
-                  <div className="w-20 opacity-50" key={hour}>
+                  <div className="w-40 opacity-50" key={hour}>
                     {hour}
                   </div>
                 ))}
 
                 <AnimatePresence>
                   <motion.div
-                    style={{
-                      margin: '5px 0px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      position: 'relative',
-                    }}
-                    initial={{
-                      height: task.isDone ? 100 * multiplerHeight : 50,
-                    }}
-                    animate={{
-                      height: task.isDone ? 50 : 100 * multiplerHeight,
-                    }}
+                    style={{ margin: '5px 0px' }}
+                    initial={{ height: task.isDone ? 'auto' : 'h-40' }}
+                    animate={{ height: task.isDone ? 'h-40' : 'auto' }}
                     transition={{ duration: 0.5 }}
-                    exit={{ height: task.isDone ? 50 : 100 * multiplerHeight }}
+                    exit={{ height: task.isDone ? 'h-40' : 'auto' }}
                     key={'container'}
                   >
-                    <div className="w-20 absolute top-0">
-                      {formatDate(task.startTime)}
-                    </div>
-                    <div className={`relative flex h-full items-center`}>
+                    <div
+                      className={`${!task.isDone ? taskHoursVariations[multiplerHeight as Hours] : ''}`}
+                    >
+                      <div className="w-40 absolute">
+                        {formatDate(task.startTime)}
+                      </div>
+
                       <div
-                        className={`left-32 w-1 h-full -z-50 absolute ${taskColorStyle}`}
-                      ></div>
+                        className={`relative flex ${isDoneVariations[task.isDone.toString()]} items-center`}
+                      >
+                        {!task.isDone ? (
+                          <div
+                            className={`left-40 w-1 h-full -z-50 absolute ${taskColorStyle}`}
+                          ></div>
+                        ) : (
+                          <></>
+                        )}
+                        <Task
+                          key={task.id}
+                          task={task as TaskType}
+                          onChange={handleChangedDone}
+                        />
+                      </div>
                     </div>
-                    <Task
-                      key={task.id}
-                      task={task as TaskType}
-                      onChange={handleChangedDone}
-                    />
                   </motion.div>
                 </AnimatePresence>
                 {hoursAfter.map((hour) => (
-                  <div className="w-20 opacity-50" key={hour}>
+                  <div className="w-40 opacity-50" key={hour}>
                     {hour}
                   </div>
                 ))}

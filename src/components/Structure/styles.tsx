@@ -21,3 +21,8 @@ export const colorVariants: Record<Color, string> = {
   gray: 'bg-gray-600 hover:bg-gray-500 border-gray-600',
   purple: 'bg-purple-600 hover:bg-purple-500 border-purple-600',
 };
+
+export const isDoneVariations: Record<string, string> = {
+  true: 'h-10',
+  false: 'h-full',
+};
