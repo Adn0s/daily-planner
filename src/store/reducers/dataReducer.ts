@@ -143,7 +143,6 @@ const dataReducer = (state = initialState, action: Action) => {
         loading: false,
         data: removeData,
         error: null,
-        blockedHours: [],
       };
       !isDemo && saveStateToLocalStorage('plannerState', removedNewObject);
 
