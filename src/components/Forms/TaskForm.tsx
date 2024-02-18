@@ -12,7 +12,7 @@ import {
 } from '../Modal/modalFormValues';
 import { colorVariants, priorityVariations } from '../Table/stylesVariations';
 import React, { useState } from 'react';
-import { convertStringToEpoch, isTimeInRange } from '../../utils/Date';
+import { convertStringToEpoch } from '../../utils/Date';
 import { TaskType } from '../../types/Task.d';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -290,11 +290,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
                 <Button className="text-nowrap	w-full px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   {selectedIcon ? (
                     <>
-                      <Icon
-                        icon={selectedIcon as Icons}
-                        color={'white'}
-                        className="pr-2"
-                      />
+                      <Icon icon={selectedIcon as Icons} color={'white'} />
                       {selectedIcon}
                     </>
                   ) : (
@@ -437,7 +433,6 @@ const TaskForm: React.FC<TaskFormProps> = ({
                   icon: selectedIcon as Icons,
                   tags: selectedTags,
                   isDone: false,
-                  blockedHours,
                 });
               } catch (error: { message: string }) {
                 setErrorMessage(error.message);
@@ -483,7 +478,6 @@ const TaskForm: React.FC<TaskFormProps> = ({
                   icon: selectedIcon as Icons,
                   tags: selectedTags,
                   isDone: false,
-                  blockedHours,
                 });
                 navigate('/tasks');
               } catch (error: { message: string }) {
