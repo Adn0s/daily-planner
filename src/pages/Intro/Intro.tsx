@@ -33,7 +33,7 @@ const Intro = ({}) => {
                   </div>
                 </div>
                 <div className="border border-black-50 h-36 w-36 p-1 rounded flex flex-col">
-                  <p className="text-sm">Daily Reset for Completed Tasks</p>
+                  <p className="text-sm">Midnight Reset for Completed Tasks</p>
                   <div className="flex justify-center items-center h-full">
                     <FaClockRotateLeft size={'2em'} />
                   </div>
@@ -41,11 +41,11 @@ const Intro = ({}) => {
               </div>
             </div>
           </div>
-          <div className="flex justify-end items-end md:justify-center pt-10 lg:pt-0">
+          <div className="flex justify-end items-end pt-10 lg:pt-0">
             <img
               src={background && background.length > 0 ? background : ''}
               alt="App visualisation"
-              className="object-cover max-w-[380px] xl:max-w-[600px]"
+              className="object-cover max-w-[600px]"
             />
           </div>
         </div>

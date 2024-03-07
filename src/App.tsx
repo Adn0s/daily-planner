@@ -20,9 +20,9 @@ const App = () => {
   const data = useSelector((state: { data: State }) => state.data.data);
   const loading = useSelector((state: { data: State }) => state.data.loading);
   const dailyWatcher = AutoFalseIsDoneFlags();
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   useEffect(() => {
     const savedData = getStateFromLocalStorage('plannerState');
