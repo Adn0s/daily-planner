@@ -1,4 +1,5 @@
 import { TaskType } from '../../types/Task.d';
+import { formatDate } from '../../utils/Date';
 import { sortByHours } from '../../utils/Sort';
 import { Action } from '../Action.d';
 import { State } from '../State.d';
@@ -6,16 +7,40 @@ import {
   getStateFromLocalStorage,
   saveStateToLocalStorage,
 } from '../../utils/LocalStorage';
-import { calculateBlockedHours } from './utils/calculateBlockedHours';
-
-const isDemo = false;
 
 const initialState: State = {
   data: [],
   blockedHours: [],
-  isDemo: isDemo, //loading prepared dataset
   loading: false,
   error: null,
+};
+
+const calculateBlockedHours = (sortedData: TaskType[]) => {
+  const mergedBlocks = [];
+  let currentBlock: null | string[] = null;
+
+  sortedData.forEach((item, index) => {
+    const startTime = formatDate(item.startTime);
+    const endTime = formatDate(item.endTime);
+
+    if (index === 0) {
+      currentBlock = [startTime, endTime];
+    } else {
+      const prevEndTime = formatDate(sortedData[index - 1].endTime);
+
+      if (startTime === prevEndTime) {
+        currentBlock[1] = endTime;
+      } else {
+        mergedBlocks.push([...currentBlock]);
+        currentBlock = [startTime, endTime];
+      }
+    }
+  });
+
+  if (currentBlock) {
+    mergedBlocks.push([...currentBlock]);
+  }
+  return mergedBlocks;
 };
 
 const dataReducer = (state = initialState, action: Action) => {
@@ -58,20 +83,22 @@ const dataReducer = (state = initialState, action: Action) => {
 
       const sortedData = sortByHours(mergedData);
       const mergedBlocks = calculateBlockedHours(sortedData);
-
-      return {
+      const fetchedState = {
         ...state,
         loading: false,
         data: sortedData,
         error: null,
         blockedHours: mergedBlocks,
       };
+      saveStateToLocalStorage('plannerState', fetchedState);
+
+      return fetchedState;
 
     case 'FETCH_DATA_ERROR':
       return { ...state, loading: false, error: action.payload };
 
     case 'SET_ALL_UNDONE':
-      const newUndoneTasks = state.data.map((item: TaskType) => {
+      const newUndoneTasks = getStateFromLocalStorage('plannerState').data.map((item: TaskType) => {
         item.isDone = false;
         return item;
       });
@@ -79,7 +106,7 @@ const dataReducer = (state = initialState, action: Action) => {
         ...state,
         data: newUndoneTasks,
       };
-      !isDemo && saveStateToLocalStorage('plannerState', newState);
+      saveStateToLocalStorage('plannerState', newState);
 
       return newState;
     case 'ADD_DATA':
@@ -95,7 +122,7 @@ const dataReducer = (state = initialState, action: Action) => {
         error: null,
       };
 
-      !isDemo && saveStateToLocalStorage('plannerState', newObject);
+      saveStateToLocalStorage('plannerState', newObject);
 
       return newObject;
     case 'UPDATE_DATA':
@@ -114,7 +141,7 @@ const dataReducer = (state = initialState, action: Action) => {
         error: null,
       };
 
-      !isDemo && saveStateToLocalStorage('plannerState', newUpdatedObject);
+      saveStateToLocalStorage('plannerState', newUpdatedObject);
 
       return newUpdatedObject;
     case 'REMOVE_DATA':
@@ -129,7 +156,7 @@ const dataReducer = (state = initialState, action: Action) => {
         error: null,
         blockedHours: [],
       };
-      !isDemo && saveStateToLocalStorage('plannerState', removedNewObject);
+      saveStateToLocalStorage('plannerState', removedNewObject);
 
       return removedNewObject;
     default:
