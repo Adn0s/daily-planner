@@ -32,22 +32,6 @@ const About = ({}) => {
                   schedule and ensure optimal productivity.
                 </p>
               </div>
-              <div className="mt-10">
-                <p className="text-left mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-                  <b>PL</b> Aplikacja to planer codzienny, który umożliwia
-                  użytkownikom dodawanie zadań na aktualny dzień w formie
-                  strukturalnej. Użytkownicy mogą efektywnie organizować swoje
-                  codzienne aktywności, dodając zadania z takimi szczegółami jak
-                  nazwa, opis, czas rozpoczęcia, czas zakończenia, kategoria,
-                  tagi, kolor, priorytet i połączenia z innymi zadaniami.
-                  Interfejs użytkownika zapewnia intuicyjne i przyjazne do
-                  użytku doświadczenie w tworzeniu, aktualizowaniu i zarządzaniu
-                  zadaniami. Zadania mogą być wizualnie przedstawione w
-                  strukturalnym harmonogramie, co ułatwia użytkownikom śledzenie
-                  ich codziennego harmonogramu i zapewnienie optymalnej
-                  produktywności.
-                </p>
-              </div>
             </div>
             <div className="border border-black-50 sm:w-full md:w-80 m-auto  rounded flex flex-col items-center justify-center p-10">
               <h2 className="text-2xl font-bold my-2"> Credentials</h2>
