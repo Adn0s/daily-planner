@@ -3,26 +3,23 @@ import { setAllUndone } from '../store/actions/dataActions';
 import { useDispatch } from 'react-redux';
 import { getStateFromLocalStorage } from '../utils/LocalStorage';
 
-export const AutoFalseIsDoneFlags = ({
-  reset,
-  handleAlert,
-}: {
-  reset: boolean;
-  handleAlert: (alert: string) => void;
-}) => {
+export const AutoFalseIsDoneFlags = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const lastRun = localStorage.getItem('lastRun');
-    const now = new Date();
-    const currentDateString = now.toDateString();
-    const savedData = getStateFromLocalStorage('plannerState');
-    if (reset && savedData && (!lastRun || lastRun !== currentDateString)) {
-      dispatch(setAllUndone());
-      handleAlert(`resetIsDone`);
-      localStorage.setItem('lastRun', currentDateString);
-    }
-  }, [reset]);
+    const resetFlagsOncePerDay = () => {
+      const lastRun = localStorage.getItem('lastRun');
+      const now = new Date();
+      const currentDateString = now.toDateString();
+      const savedData = getStateFromLocalStorage('plannerState');
+      if (savedData && (!lastRun || lastRun !== currentDateString)) {
+        dispatch(setAllUndone());
+        localStorage.setItem('lastRun', currentDateString);
+      }
+    };
+
+    resetFlagsOncePerDay();
+  }, [dispatch]);
 
   return null;
 };
