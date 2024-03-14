@@ -21,7 +21,7 @@ const Credentials = ({}) => {
                   width={80}
                   className="mx-auto"
                   alt="Just me"
-                  height={'auto'}
+                  loading="lazy"
                 />
               </div>
               <p className="mt-5 text-lg">
@@ -36,8 +36,8 @@ const Credentials = ({}) => {
                 >
                   <img
                     src={LinkedinLogo}
+                    loading="lazy"
                     width={20}
-                    height={'auto'}
                     className="mr-auto"
                     alt="Linkedin logo"
                     rel="noreferrer"
@@ -52,7 +52,7 @@ const Credentials = ({}) => {
                 >
                   <img
                     src={GithubLogo}
-                    height={'auto'}
+                    loading="lazy"
                     width={20}
                     className="mr-auto"
                     alt="Github logo"
@@ -70,9 +70,9 @@ const Credentials = ({}) => {
                   rel="noreferrer"
                 >
                   <img
+                    loading="lazy"
                     src={Adn0sDev}
                     width={100}
-                    height={'auto'}
                     className="mx-auto"
                     alt="Adn0sDev logo"
                   />
