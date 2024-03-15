@@ -1,80 +1,35 @@
-# React-Typescript-Template
+<h1 align="center" id="title">Daily Planner</h1>
 
-<div align="center">
-<img src="./src/assets/images/react-typescript-template.png"/>
-</div>
+![image](https://github.com/Adn0s/daily-planner/assets/29124012/686006cc-985e-4bf3-bbdf-73d1aec5b8a5)
 
-## Welcome to my React template
 
-This template is built with the following technologies:
+<p id="description">Transform your daily scheduling with the Daily Planner app. Incorporate tasks effortlessly, specifying details such as names, descriptions, timelines, categories, tags, colors, and priorities. With its intuitive interface, this app offers a streamlined approach to task management and timeline structuring, enhancing your productivity with ease.</p>
 
-- Language: **TypeScript**
-- Styling: **TailwindCSS**
-- Testing: **Jest**
-- Linting: **ESLint**
-- Formatting: **Prettier**
-- Bundling: **Webpack**
-- Transpiling: **Babel**
-- Lint Staged: **Husky**
-- **React Refresh**
-- **Development** & **Production** configurations
-- Declarations for **png** and **svg** files
-  
-## Getting Started
+<!---
+<h2>🚀 Demo</h2>
 
-Using this template is very simple, follow the following instructions:
+Discover the Daily Planner to boost your organizational skills.
+-->
+<h2>🧐 Features</h2>
 
-1. Fork the repository
-2. Create a new repository and select forked repository as template
+Key features of the project include:
 
-Or,
+*   Simplified task management with options to customize names, descriptions, colors, icons, priorities, start and end times, tags, and categories.
+*   A dynamic timeline that presents a comprehensive view of your agenda, complete with features for easy filtering and sorting by date.
+*   The ability to mark tasks as complete and reset them daily, keeping your agenda fresh and ready for new tasks.
 
-1. Clone the repository
+<h2>💻 Built with</h2>
 
-```bash
-git clone https://github.com/divshekhar/react-typescript-template.git
-```
+The project incorporates the following technologies:
 
-2. Install the dependencies
+*   Typescript
+*   React
+*   Jest
+*   TailwindCss
+*   Redux
+*   Flowbite UI
+*   Framer
 
-```bash
-npm install
-```
+<h2>🛡️ License:</h2>
 
-3. Start the development server
-
-```bash
-npm start
-```
-
-4. Build for production
-
-```bash
-npm run build
-```
-
-## Features
-
-- [x] TypeScript for improved code quality and developer experience
-- [x] TailwindCSS for responsive styling
-- [x] Jest for unit testing
-- [x] ESLint for linting and maintaining code consistency
-- [x] Prettier for automatic code formatting
-- [x] Webpack for bundling and building the application
-- [x] Babel for transpiling modern JavaScript to older versions for better browser compatibility
-- [x] Husky for running lint-staged, which lints and fixes files before committing
-- [x] React Refresh for faster development experience
-- [x] Development & Production configurations for different environment settings
-- [x] Declarations for png and svg for improved developer experience
-
-## Contributing
-
-Please feel free to contribute to this project by submitting issues or pull requests.
-
-## License
-
-This project is licensed under the ISC License.
-
-## Acknowledgements
-
-Thank you for using this template. I hope it helps you build your next project with ease.
+The MIT License governs this project.
